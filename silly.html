@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smile Trap</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at center, #ffe6f0, #ffcce0);
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      overflow: hidden;
+      color: #d6336c;
+    }
+
+    .popup {
+      position: relative;
+      top: 20vh;
+      z-index: 2;
+    }
+
+    .avatar {
+      width: 200px;
+      border-radius: 50%;
+      box-shadow: 0 0 30px rgba(255, 105, 180, 0.5);
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    .message {
+      margin-top: 20px;
+      font-size: 22px;
+      padding: 0 30px;
+    }
+
+    .continue-button {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 12px 24px;
+      background-color: #ff69b4;
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      font-size: 18px;
+      box-shadow: 0 0 10px rgba(255, 105, 180, 0.4);
+      transition: background-color 0.3s ease;
+    }
+
+    .continue-button:hover {
+      background-color: #e055a0;
+    }
+
+    .floating {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      animation: floatUp 6s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-600px) scale(1.5); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="popup">
+    <img src="bubu'ssilly.jpg" alt="Su Avatar" class="avatar">
+    <div class="message">
+      Caught you! Smiling already, aren’t you?<br>
+      This whole site is a trap…<br>
+      A trap to make you smile, feel loved, and never forget how much you mean to me.
+    </div>
+    <a href="maze.html" class="continue-button" onclick="playSound()">Keep going</a>
+  </div>
+
+  <audio id="giggleSound" src="funny.mp3" autoplay></audio>
+
+  <script>
+    function playSound() {
+      document.getElementById("giggleSound").play();
+      sound.play().catch(error => {
+        console.log("Sound blocked or failed:", error);
+     });
+    }
+
+    function createFloatingEffect() {
+      const emoji = document.createElement("div");
+      emoji.className = "floating";
+
+      const images = [
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Heart_corazón.svg/1024px-Heart_corazón.svg.png",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Emoji_u2728.svg/1024px-Emoji_u2728.svg.png",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Emoji_u1f48b.svg/1024px-Emoji_u1f48b.svg.png"
+      ];
+      emoji.style.backgroundImage = `url('${images[Math.floor(Math.random() * images.length)]}')`;
+
+      const button = document.querySelector(".continue-button");
+      const rect = button.getBoundingClientRect();
+      emoji.style.left = rect.left + rect.width / 2 + "px";
+      emoji.style.top = rect.top + "px";
+
+      document.body.appendChild(emoji);
+      setTimeout(() => emoji.remove(), 6000);
+    }
+
+    setInterval(createFloatingEffect, 500);
+  </script>
+
+</body>
+</html>
